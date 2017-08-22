@@ -95,6 +95,10 @@ Route::get('services_list', 'ServiceController@servicesList');
 //Comments
 Route::post('comments/update', 'CommentsController@update');
 
+Route::get('customer', function ()  {
+    return view('customer');
+});
+
 
 
 

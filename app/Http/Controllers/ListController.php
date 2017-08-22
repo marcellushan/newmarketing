@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\ServiceRequests;
 use App\User;
+use App\Customer;
 
 class ListController extends Controller
 {
@@ -25,7 +26,7 @@ class ListController extends Controller
      */
     public function index()
     {
-        $user = Auth::user();
+        $user = Customer::find(session('customer_id'));
 //        dd($user);
         $service_requests = ServiceRequests::where('user_id', '=', $user->id)->orderBy('created_at','desc')->get();
 //        dd($service_requests);
@@ -62,7 +63,7 @@ class ListController extends Controller
     public function show($id)
     {
         $data = ServiceRequests::find($id);
-        $user_info = User::find($data->user_id);
+        $user_info = Customer::find($data->user_id);
         (@$data->pressRelease ? $press_release = $data->pressRelease : $press_release = '');
         (@$data->designPrinting ? $design_printing = $data->designPrinting : $design_printing = '');
         (@$data->photography ? $photography = $data->photography : $photography = '');

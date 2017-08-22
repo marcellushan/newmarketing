@@ -292,7 +292,7 @@ class BaseController extends Controller
     {
         if(! session('customer_id'))
             return redirect('service_request');
-        dd(session('customer_id'));
+//        dd(session('customer_id'));
         $model_name = $this::MODEL_NAME;
 //        $service_type = $model_name::where('service_requests_id', '=', $id)->first();
         $service_type = $model_name::find($id);
