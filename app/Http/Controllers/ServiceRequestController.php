@@ -73,6 +73,7 @@ class ServiceRequestController extends Controller
      */
     public function create()
     {       $customer = Customer::find(session('customer_id'));
+        dd($customer);
 //        if(\App::environment() =='local') {
 //            $username = 'jjones';
 //            $givenname = 'Joe';
