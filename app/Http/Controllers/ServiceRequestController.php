@@ -72,8 +72,8 @@ class ServiceRequestController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {       $customer = Customer::find(session('customer_id'));
-        dd($customer);
+    {       $user = Customer::find(session('customer_id'));
+        dd($user);
 //        if(\App::environment() =='local') {
 //            $username = 'jjones';
 //            $givenname = 'Joe';
