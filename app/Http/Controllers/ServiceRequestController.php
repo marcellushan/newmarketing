@@ -31,16 +31,28 @@ class ServiceRequestController extends Controller
 //            $_SESSION['attributes']['givenname'] = 'Marc';
 //            $_SESSION['attributes']['surname'] = 'Hannah';
 //            $_SESSION['attributes']['Group'] = 'IT';
-            return redirect('service_request/create');
-            dd($_SESSION);
+            $username = 'jjones';
+            $givenname = 'Joe';
+            $surname = 'Jones';
+            $department = 'IT';
+//            return redirect('service_request/create');
+//            dd($_SESSION);
         } else {
             if(! @$_SESSION['AdfsUserDetails']) {
                 $url='../../marctest/myform.php';
                 echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
             } else {
-                return redirect('service_request/create');
+                $username = $_SESSION['nameIdentifier'];
+                $givenname = implode(" ", $_SESSION['attributes']['givenname']);
+                $surname = implode(" ", $_SESSION['attributes']['surname']);
+                $department = implode(" ", $_SESSION['attributes']['Group']);
+//                return redirect('service_request/create');
             }
         }
+
+        $customer = Customer::firstOrCreate(['email' => $username . '@highlands.edu','name' => $givenname . ' ' . $surname, 'department' => $department]);
+        $_SESSION['customer_id'] = $customer->id;
+        return view('service_request.create')->with(compact('customer'));
 
 //        $user = User::firstOrCreate(['name' => 'Joe Hannah', 'email' => 'jhannah@highlands.edu','department' => 'HR']);
 //        dd(\App::environment());
@@ -71,7 +83,7 @@ class ServiceRequestController extends Controller
             $department = implode(" ", $_SESSION['attributes']['Group']);
         }
         $customer = Customer::firstOrCreate(['email' => $username . '@highlands.edu','name' => $givenname . ' ' . $surname, 'department' => $department]);
-//        $_SESSION['user_id'] = $user->id;
+        $_SESSION['customer_id'] = $customer->id;
         return view('service_request.create')->with(compact('customer'));
     }
 
