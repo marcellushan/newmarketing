@@ -46,13 +46,16 @@ class ServiceRequestController extends Controller
                 $givenname = implode(" ", $_SESSION['attributes']['givenname']);
                 $surname = implode(" ", $_SESSION['attributes']['surname']);
                 $department = implode(" ", $_SESSION['attributes']['Group']);
+                $customer = Customer::firstOrCreate(['email' => $username . '@highlands.edu','name' => $givenname . ' ' . $surname, 'department' => $department]);
+                session(['customer_id' => $customer->id]);
+                return view('service_request.create')->with(compact('customer'));
 //                return redirect('service_request/create');
             }
         }
 
-        $customer = Customer::firstOrCreate(['email' => $username . '@highlands.edu','name' => $givenname . ' ' . $surname, 'department' => $department]);
-        session(['customer_id' => $customer->id]);
-        return view('service_request.create')->with(compact('customer'));
+//        $customer = Customer::firstOrCreate(['email' => $username . '@highlands.edu','name' => $givenname . ' ' . $surname, 'department' => $department]);
+//        session(['customer_id' => $customer->id]);
+//        return view('service_request.create')->with(compact('customer'));
 
 //        $user = User::firstOrCreate(['name' => 'Joe Hannah', 'email' => 'jhannah@highlands.edu','department' => 'HR']);
 //        dd(\App::environment());
