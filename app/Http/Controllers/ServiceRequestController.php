@@ -46,7 +46,7 @@ class ServiceRequestController extends Controller
                 $surname = implode(" ", $_SESSION['attributes']['surname']);
                 $department = implode(" ", $_SESSION['attributes']['Group']);
                 $customer = Customer::firstOrCreate(['email' => $username . '@highlands.edu','name' => $givenname . ' ' . $surname, 'department' => $department]);
-                session(['customer_id' => $customer->id]);
+                $_SESSION['customer_id'] = $customer->id;
                 dd(session('customer_id'));
                 return view('service_request.create')->with(compact('customer'));
 //                return redirect('customer');
@@ -72,9 +72,9 @@ class ServiceRequestController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {       $user = Customer::find(session('customer_id'));
-        dd(session('customer_id'));
+        dd($_SESSION['customer_id']);
 //        if(\App::environment() =='local') {
 //            $username = 'jjones';
 //            $givenname = 'Joe';
