@@ -25,7 +25,7 @@ class BaseController extends Controller
 
     public function __construct()
     {
-//        $this->middleware('auth');
+            return redirect('service_request');
     }
 
     /**
@@ -290,6 +290,9 @@ class BaseController extends Controller
 
     public function customerShow($id)
     {
+        if(! session('customer_id'))
+            return redirect('service_request');
+        dd(session('customer_id'));
         $model_name = $this::MODEL_NAME;
 //        $service_type = $model_name::where('service_requests_id', '=', $id)->first();
         $service_type = $model_name::find($id);

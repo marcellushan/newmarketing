@@ -51,7 +51,7 @@ class ServiceRequestController extends Controller
         }
 
         $customer = Customer::firstOrCreate(['email' => $username . '@highlands.edu','name' => $givenname . ' ' . $surname, 'department' => $department]);
-        $_SESSION['customer_id'] = $customer->id;
+        session(['customer_id' => $customer->id]);
         return view('service_request.create')->with(compact('customer'));
 
 //        $user = User::firstOrCreate(['name' => 'Joe Hannah', 'email' => 'jhannah@highlands.edu','department' => 'HR']);
@@ -124,6 +124,8 @@ class ServiceRequestController extends Controller
      */
     public function show($id)
     {
+        if(! session('customer_id'))
+            return redirect('service_request');
         $data = ServiceRequests::find($id);
         $user_info = Customer::find($data->user_id);
 //        dd($data);
