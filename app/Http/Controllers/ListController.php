@@ -40,7 +40,22 @@ class ListController extends Controller
      */
     public function create()
     {
-        //
+        $customer = Customer::find(session('customer_id'));
+        dd($customer);
+//        if(\App::environment() =='local') {
+//            $username = 'jjones';
+//            $givenname = 'Joe';
+//            $surname = 'Jones';
+//            $department = 'IT';
+//        } else {
+//            $username = $_SESSION['nameIdentifier'];
+//            $givenname = implode(" ", $_SESSION['attributes']['givenname']);
+//            $surname = implode(" ", $_SESSION['attributes']['surname']);
+//            $department = implode(" ", $_SESSION['attributes']['Group']);
+//        }
+//        $customer = Customer::firstOrCreate(['email' => $username . '@highlands.edu','name' => $givenname . ' ' . $surname, 'department' => $department]);
+//        $_SESSION['customer_id'] = $customer->id;
+        return view('service_request.create')->with(compact('customer'));
     }
 
     /**
