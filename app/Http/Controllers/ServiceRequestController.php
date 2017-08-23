@@ -72,7 +72,7 @@ class ServiceRequestController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($id)
+    public function create()
     {
         dd($_SESSION['customer_id']);
         $customer = Customer::find($id);
