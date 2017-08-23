@@ -48,8 +48,8 @@ class ServiceRequestController extends Controller
                 $customer = Customer::firstOrCreate(['email' => $username . '@highlands.edu','name' => $givenname . ' ' . $surname, 'department' => $department]);
                 $_SESSION['customer_id'] = $customer->id;
                 dd($_SESSION['customer_id']);
-                return view('service_request.create')->with(compact('customer'));
-//                return redirect('customer');
+//                return view('service_request.create')->with(compact('customer'));
+                return redirect('customer');
             }
         }
 

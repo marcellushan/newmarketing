@@ -290,7 +290,7 @@ class BaseController extends Controller
 
     public function customerShow($id)
     {
-        if(! session('customer_id'))
+        if (! @$_SESSION['customer_id'])
             return redirect('service_request');
 //        dd(session('customer_id'));
         $model_name = $this::MODEL_NAME;
