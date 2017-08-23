@@ -78,7 +78,7 @@ class ServiceRequestController extends Controller
         if (! @$_SESSION['customer_id'])
             return redirect('service_request');
         $customer = Customer::find($_SESSION['customer_id']);
-        dd($customer);
+//        dd($customer);
 //        if(\App::environment() =='local') {
 //            $username = 'jjones';
 //            $givenname = 'Joe';
