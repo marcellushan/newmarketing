@@ -26,7 +26,7 @@ class ListController extends Controller
      */
     public function index()
     {
-        $user = Customer::find(session('customer_id'));
+        $user = Customer::find($_SESSION['customer_id']);
 //        dd($user);
         $service_requests = ServiceRequests::where('user_id', '=', $user->id)->orderBy('created_at','desc')->get();
 //        dd($service_requests);
