@@ -74,7 +74,9 @@ class ServiceRequestController extends Controller
      */
     public function create()
     {
-        dd($_SESSION['customer_id']);
+//        dd($_SESSION['customer_id']);
+        if (! @)$_SESSION['customer_id'])
+            return redirect('service_request');
         $customer = Customer::find($id);
         dd($customer);
 //        if(\App::environment() =='local') {
